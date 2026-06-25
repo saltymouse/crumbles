@@ -1,0 +1,35 @@
+name: release
+
+# Builds the AMO artifacts whenever a version tag (v1.2.3) is pushed, and
+# attaches both the add-on package and the source zip to a GitHub Release.
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+      - run: bun install --frozen-lockfile
+      - run: bun run package
+      - name: Name artifacts after the tag
+        run: |
+          mv dist/crumbles.zip "dist/crumbles-${GITHUB_REF_NAME}.zip"
+          mv dist/crumbles-source.zip "dist/crumbles-source-${GITHUB_REF_NAME}.zip"
+      - name: Create GitHub Release with both zips
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            "dist/crumbles-${GITHUB_REF_NAME}.zip" \
+            "dist/crumbles-source-${GITHUB_REF_NAME}.zip" \
+            --title "Crumbles ${GITHUB_REF_NAME}" \
+            --notes "Add-on package and source for AMO submission. Build it yourself: bun install --frozen-lockfile && bun run build:firefox"
