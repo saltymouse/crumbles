@@ -1,0 +1,36 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="128" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#312e81"/>
+      <stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="shell" x1="64" y1="38" x2="64" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f0c581"/>
+      <stop offset="1" stop-color="#d49b4d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- branded tile -->
+  <rect width="128" height="128" rx="28" fill="url(#tile)"/>
+
+  <!-- madeleine shell: pointed hinge at bottom, scalloped fan at top -->
+  <path d="M64 95 C 41 92 29 73 31 51 Q 37 41 43 50 Q 50 41 57 50 Q 64 40 71 50 Q 78 41 85 50 Q 91 41 97 51 C 99 73 87 92 64 95 Z" fill="url(#shell)"/>
+
+  <!-- ridges radiating from the hinge -->
+  <g stroke="#bd7f38" stroke-width="2.4" stroke-linecap="round" opacity="0.55" fill="none">
+    <path d="M64 90 L36 56"/>
+    <path d="M64 90 L50 51"/>
+    <path d="M64 90 L64 48"/>
+    <path d="M64 90 L78 51"/>
+    <path d="M64 90 L92 56"/>
+  </g>
+
+  <!-- soft highlight along the baked top -->
+  <path d="M40 52 Q52 45 64 45 Q76 45 88 52" stroke="#f8dba6" stroke-width="3" stroke-linecap="round" opacity="0.5" fill="none"/>
+
+  <!-- crumbs scattered for "Crumbles" -->
+  <circle cx="22" cy="92" r="3.2" fill="#e8b56a"/>
+  <circle cx="107" cy="84" r="2.6" fill="#e8b56a"/>
+  <circle cx="103" cy="99" r="2.2" fill="#edba73"/>
+  <circle cx="24" cy="78" r="2" fill="#edba73"/>
+</svg>
