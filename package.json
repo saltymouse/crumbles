@@ -6,9 +6,8 @@
   "license": "MIT",
   "type": "module",
   "author": {
-    "name": "Your Name",
-    "email": "your@email.com",
-    "url": "https://yourwebsite.com"
+    "name": "saltymouse",
+    "url": "https://github.com/saltymouse"
   },
   "scripts": {
     "dev": "extension dev",
