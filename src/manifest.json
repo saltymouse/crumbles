@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "version": "1.0.0",
+  "name": "Crumbles",
+  "description": "Smart rolling cleanup for browsing history, cookies, and site data. Keeps what you use, clears what you don't.",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon.png"
+  },
+  "browser_action": {
+    "default_popup": "popup/index.html",
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "48": "images/icon-48.png"
+    },
+    "default_title": "Crumbles"
+  },
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "history",
+    "cookies",
+    "browsingData",
+    "storage",
+    "alarms",
+    "tabs",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  }
+}
