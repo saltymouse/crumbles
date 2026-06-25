@@ -18,7 +18,10 @@
     "build:firefox": "extension build --browser firefox",
     "build:edge": "extension build --browser edge",
     "lint:firefox": "addons-linter dist/firefox",
-    "check:firefox": "bun run build:firefox && bun run lint:firefox"
+    "check:firefox": "bun run build:firefox && bun run lint:firefox",
+    "package:firefox": "rm -rf dist/firefox && bun run build:firefox && (cd dist/firefox && zip -qr -FS ../crumbles.zip .)",
+    "package:source": "mkdir -p dist && git archive --format=zip --prefix=crumbles/ HEAD -o dist/crumbles-source.zip",
+    "package": "bun run package:firefox && bun run package:source"
   },
   "dependencies": {},
   "devDependencies": {
