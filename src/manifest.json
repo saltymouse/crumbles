@@ -32,5 +32,11 @@
   "background": {
     "scripts": ["background.js"],
     "persistent": true
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "crumbles@saltymouse.github.io",
+      "strict_min_version": "109.0"
+    }
   }
 }
