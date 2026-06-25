@@ -35,7 +35,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "crumbles@saltymouse.github.io",
+      "id": "{054f17ff-249b-4761-9cf6-d3306423bcc2}",
       "strict_min_version": "140.0",
       "data_collection_permissions": {
         "required": ["none"]
