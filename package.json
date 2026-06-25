@@ -2,7 +2,7 @@
   "private": true,
   "name": "crumbles",
   "description": "Smart rolling cleanup for browsing history, cookies, and site data. Keeps what you use, clears what you don't.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "type": "module",
   "author": {

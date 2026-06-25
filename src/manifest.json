@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "Crumbles",
   "description": "Smart rolling cleanup for browsing history, cookies, and site data. Keeps what you use, clears what you don't.",
   "icons": {
