@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crumbles — Settings</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="page">
+
+    <header class="page-header">
+      <div class="page-header-inner">
+        <div class="brand">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none">
+            <path d="M12 18.4 C 7.7 18 5.2 14.2 5.5 10 Q 6.7 8 8 9.7 Q 9.4 8 10.7 9.7 Q 12 7.7 13.3 9.7 Q 14.6 8 15.9 9.7 Q 17.3 8 18.5 10 C 18.8 14.2 16.3 18 12 18.4 Z" fill="#ecc079"/>
+            <g stroke="#bd7f38" stroke-width="0.7" stroke-linecap="round" opacity="0.6" fill="none">
+              <path d="M12 17 L7.4 11"/>
+              <path d="M12 17 L9.7 9.9"/>
+              <path d="M12 17 L12 9.5"/>
+              <path d="M12 17 L14.3 9.9"/>
+              <path d="M12 17 L16.6 11"/>
+            </g>
+            <circle cx="4.3" cy="16.5" r="0.9" fill="#e8b86e"/>
+            <circle cx="19.7" cy="15.5" r="0.8" fill="#e8b86e"/>
+          </svg>
+          <div>
+            <div class="brand-name">Crumbles</div>
+            <div class="brand-tagline">Smart browsing data cleanup</div>
+          </div>
+        </div>
+        <div class="save-status" id="saveStatus"></div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- Schedule -->
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            Schedule
+          </h2>
+          <p class="card-desc">Choose when Crumbles automatically cleans up stale site data.</p>
+        </div>
+        <div class="card-body">
+          <div class="radio-group">
+            <label class="radio-option" id="scheduleHybridLabel">
+              <input type="radio" name="schedule" value="hybrid" id="scheduleHybrid" />
+              <div class="radio-content">
+                <div class="radio-title">On startup and daily <span class="radio-badge">Recommended</span></div>
+                <div class="radio-desc" id="descHybrid">Runs when the browser opens and once a day. Best coverage — catches launches, long sessions, and time missed while your computer was asleep.</div>
+              </div>
+            </label>
+            <label class="radio-option" id="scheduleDailyLabel">
+              <input type="radio" name="schedule" value="daily" id="scheduleDaily" />
+              <div class="radio-content">
+                <div class="radio-title">Daily at a set time</div>
+                <div class="radio-desc" id="descDaily">Runs once per day while the browser is open.</div>
+              </div>
+            </label>
+            <label class="radio-option" id="scheduleStartupLabel">
+              <input type="radio" name="schedule" value="startup" id="scheduleStartup" />
+              <div class="radio-content">
+                <div class="radio-title">On browser startup</div>
+                <div class="radio-desc" id="descStartup">Runs once each time the browser opens. Reliable and unobtrusive.</div>
+              </div>
+            </label>
+            <label class="radio-option" id="scheduleManualLabel">
+              <input type="radio" name="schedule" value="manual" id="scheduleManual" />
+              <div class="radio-content">
+                <div class="radio-title">Manual only</div>
+                <div class="radio-desc">Only runs when you click "Run Cleanup" in the popup.</div>
+              </div>
+            </label>
+          </div>
+          <div class="time-picker time-row" id="timePicker">
+            <span class="time-row-label">Run the daily cleanup at</span>
+            <select id="scheduleHour" aria-label="Hour for daily cleanup">
+              <!-- populated by JS -->
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Retention -->
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-.293.707L13 10.414V17a1 1 0 01-.553.894l-4 2A1 1 0 017 19v-8.586L3.293 6.707A1 1 0 013 6V4z"/></svg>
+            Retention Rules
+          </h2>
+          <p class="card-desc">Sites you've visited recently are always kept. Only stale, unused sites get cleaned.</p>
+        </div>
+        <div class="card-body">
+
+          <div class="field">
+            <label class="field-label" for="retentionDays">Keep data from sites visited in the last</label>
+            <div class="field-row">
+              <input type="number" id="retentionDays" min="1" max="365" value="30" class="num-input" />
+              <span class="field-unit">days</span>
+            </div>
+            <div class="field-hint">Sites visited within this window are protected and won't be touched.</div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="minVisits">
+              Minimum visits to count as "active"
+              <span class="tooltip-anchor" tabindex="0" aria-describedby="minVisitsTip">?</span>
+              <div class="tooltip" role="tooltip" id="minVisitsTip">
+                If set to 3, a site must have been visited at least 3 times in your retention window to be kept. Useful for filtering out one-off visits.
+              </div>
+            </label>
+            <div class="field-row">
+              <input type="number" id="minVisits" min="1" max="50" value="1" class="num-input" />
+              <span class="field-unit">visit(s)</span>
+            </div>
+            <div class="field-hint">Set to 1 to keep any site you've visited at least once.</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Data Types -->
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>
+            What to Clean
+          </h2>
+          <p class="card-desc">Choose which types of data are removed for stale sites.</p>
+        </div>
+        <div class="card-body">
+
+          <div class="toggle-item">
+            <div class="toggle-info">
+              <div class="toggle-label">Browsing History</div>
+              <div class="toggle-desc">Removes page visit records for stale sites.</div>
+            </div>
+            <label class="toggle" aria-label="Toggle browsing history cleanup">
+              <input type="checkbox" id="dtHistory" />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+
+          <div class="toggle-item">
+            <div class="toggle-info">
+              <div class="toggle-label">
+                Cookies
+                <span class="badge badge--warning">Logs you out</span>
+              </div>
+              <div class="toggle-desc">Deletes login sessions and preferences for stale sites. You will be logged out of those sites.</div>
+            </div>
+            <label class="toggle" aria-label="Toggle cookie cleanup">
+              <input type="checkbox" id="dtCookies" />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+
+          <div class="toggle-item">
+            <div class="toggle-info">
+              <div class="toggle-label">Local Storage</div>
+              <div class="toggle-desc">Clears site-stored data like preferences and saved state.</div>
+            </div>
+            <label class="toggle" aria-label="Toggle local storage cleanup">
+              <input type="checkbox" id="dtLocalStorage" />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+
+          <div class="toggle-item">
+            <div class="toggle-info">
+              <div class="toggle-label">IndexedDB</div>
+              <div class="toggle-desc">Removes offline databases and app data stored by sites.</div>
+            </div>
+            <label class="toggle" aria-label="Toggle IndexedDB cleanup">
+              <input type="checkbox" id="dtIndexedDB" />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+
+          <div class="toggle-item">
+            <div class="toggle-info">
+              <div class="toggle-label">
+                Cache
+                <span class="badge badge--info">Global</span>
+              </div>
+              <div class="toggle-desc">Removes cached files older than your retention window. This applies to <em>all</em> sites, not just stale ones — pages may load slower temporarily.</div>
+            </div>
+            <label class="toggle" aria-label="Toggle cache cleanup">
+              <input type="checkbox" id="dtCache" />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Protected Sites -->
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Protected Sites
+          </h2>
+          <p class="card-desc">These sites are never touched, no matter how long ago you visited them. Use domain names like <code>google.com</code> — subdomains are included automatically.</p>
+        </div>
+        <div class="card-body">
+
+          <div class="whitelist-add">
+            <input
+              type="text"
+              id="whitelistInput"
+              placeholder="example.com"
+              class="text-input"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <button class="btn-secondary" id="whitelistAddBtn">Add</button>
+          </div>
+
+          <ul class="whitelist" id="whitelistItems">
+            <!-- populated by JS -->
+          </ul>
+
+          <div class="whitelist-empty" id="whitelistEmpty">
+            No protected sites yet. Add domains above to prevent them from ever being cleaned.
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Dry Run -->
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
+            Preview Mode
+          </h2>
+        </div>
+        <div class="card-body">
+          <div class="toggle-item toggle-item--solo">
+            <div class="toggle-info">
+              <div class="toggle-label">Dry run — preview without deleting</div>
+              <div class="toggle-desc">When enabled, cleanups show you what <em>would</em> be removed without actually deleting anything. Great for testing your settings before committing.</div>
+            </div>
+            <label class="toggle" aria-label="Toggle dry run mode">
+              <input type="checkbox" id="dryRun" />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Activity Log -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-header-row">
+            <h2 class="card-title">
+              <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/></svg>
+              Recent Activity
+            </h2>
+            <button class="btn-ghost btn-sm" id="clearLogBtn">Clear log</button>
+          </div>
+          <p class="card-desc">A history of your last 30 cleanup runs.</p>
+        </div>
+        <div class="card-body">
+          <div class="log-list" id="logList">
+            <!-- populated by JS -->
+          </div>
+          <div class="log-empty" id="logEmpty">
+            No cleanup runs yet.
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
