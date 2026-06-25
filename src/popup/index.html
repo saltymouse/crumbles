@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crumbles</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="popup">
+
+    <header class="header">
+      <div class="header-brand">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 18.4 C 7.7 18 5.2 14.2 5.5 10 Q 6.7 8 8 9.7 Q 9.4 8 10.7 9.7 Q 12 7.7 13.3 9.7 Q 14.6 8 15.9 9.7 Q 17.3 8 18.5 10 C 18.8 14.2 16.3 18 12 18.4 Z" fill="#ecc079"/>
+          <g stroke="#bd7f38" stroke-width="0.7" stroke-linecap="round" opacity="0.6" fill="none">
+            <path d="M12 17 L7.4 11"/>
+            <path d="M12 17 L9.7 9.9"/>
+            <path d="M12 17 L12 9.5"/>
+            <path d="M12 17 L14.3 9.9"/>
+            <path d="M12 17 L16.6 11"/>
+          </g>
+          <circle cx="4.3" cy="16.5" r="0.9" fill="#e8b86e"/>
+          <circle cx="19.7" cy="15.5" r="0.8" fill="#e8b86e"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">Crumbles</span>
+          <span class="brand-tagline">Keeps what you use, clears what you don't</span>
+        </div>
+      </div>
+      <button class="icon-btn" id="settingsBtn" title="Open Settings" aria-label="Open Settings">
+        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+          <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+        </svg>
+      </button>
+    </header>
+
+    <main class="body">
+
+      <div class="status-section" id="statusSection">
+        <div class="status-icon-wrap" id="statusIconWrap">
+          <svg class="status-icon status-icon--ready" id="statusIconReady" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="#eef2ff"/>
+            <path d="M12 6.2l1.05 2.9a2 2 0 001.2 1.2l2.9 1.05-2.9 1.05a2 2 0 00-1.2 1.2L12 16.5l-1.05-2.9a2 2 0 00-1.2-1.2L6.85 11.35l2.9-1.05a2 2 0 001.2-1.2L12 6.2z" fill="#6366f1"/>
+          </svg>
+          <svg class="status-icon status-icon--clean" id="statusIconClean" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="#d1fae5"/>
+            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg class="status-icon status-icon--never" id="statusIconNever" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="#e5e7eb"/>
+            <path d="M12 8v5M12 16h.01" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="status-text">
+          <div class="status-label" id="statusLabel">Checking your sites…</div>
+          <div class="status-sub" id="statusSub"></div>
+        </div>
+      </div>
+
+      <div class="stats-group" id="statsGroup" style="display:none">
+      <div class="stats-heading" id="statsHeading">Removed in last cleanup</div>
+      <div class="stats-row" id="statsRow">
+        <div class="stat-chip" id="statSites">
+          <span class="stat-num" id="statSitesNum">—</span>
+          <span class="stat-label">sites</span>
+        </div>
+        <div class="stat-chip" id="statHistory">
+          <span class="stat-num" id="statHistoryNum">—</span>
+          <span class="stat-label">history</span>
+        </div>
+        <div class="stat-chip" id="statCookies">
+          <span class="stat-num" id="statCookiesNum">—</span>
+          <span class="stat-label">cookies</span>
+        </div>
+      </div>
+      </div>
+
+      <button class="run-btn" id="runBtn">
+        <svg class="run-icon" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+        </svg>
+        <span id="runBtnText">Run Cleanup</span>
+        <svg class="spinner" id="spinner" viewBox="0 0 24 24" fill="none" width="16" height="16" style="display:none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="31.4" stroke-dashoffset="10" opacity="0.3"/>
+          <path d="M12 2a10 10 0 0110 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <div class="dry-run-notice" id="dryRunNotice" style="display:none">
+        <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 2a1 1 0 110 2 1 1 0 010-2zm0 4a1 1 0 011 1v3a1 1 0 11-2 0V8a1 1 0 011-1z"/></svg>
+        Preview mode. No data will be deleted.
+      </div>
+
+      <div class="run-hint" id="runHint"></div>
+
+      <div class="next-run" id="nextRun"></div>
+
+    </main>
+
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
