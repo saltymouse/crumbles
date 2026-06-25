@@ -16,11 +16,14 @@
     "preview": "extension preview",
     "build:chrome": "extension build --browser chrome",
     "build:firefox": "extension build --browser firefox",
-    "build:edge": "extension build --browser edge"
+    "build:edge": "extension build --browser edge",
+    "lint:firefox": "addons-linter dist/firefox",
+    "check:firefox": "bun run build:firefox && bun run lint:firefox"
   },
   "dependencies": {},
   "devDependencies": {
-    "extension": "^3.18.1"
+    "addons-linter": "^10.7.0",
+    "extension": "^3.18.4"
   },
   "packageManager": "bun@1.3.14"
 }
