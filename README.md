@@ -38,6 +38,15 @@ Then in Firefox:
 
 > Firefox drops temporary add-ons when it restarts, so you'll re-load it each session during development.
 
+## Publishing to Firefox Add-ons
+
+```bash
+bun run build:firefox
+cd dist/firefox && zip -r -FS ../crumbles.zip . && cd -   # zip with manifest.json at the root
+```
+
+Upload `dist/crumbles.zip` at the [AMO Developer Hub](https://addons.mozilla.org/developers/) and pick "On this site" to list it. The build is bundled, so when prompted, point reviewers at this repo with build steps `bun install && bun run build:firefox`.
+
 ## Commands
 
 ```bash
