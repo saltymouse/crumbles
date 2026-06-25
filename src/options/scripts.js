@@ -122,7 +122,7 @@ function showSaveStatus(text) {
 
 // --- Whitelist ---
 function renderWhitelist(list) {
-  whitelistItems.innerHTML = ''
+  whitelistItems.replaceChildren()
   if (!list || list.length === 0) {
     whitelistEmpty.style.display = 'block'
     return
@@ -132,11 +132,19 @@ function renderWhitelist(list) {
     const li = document.createElement('li')
     li.className = 'whitelist-item'
     li.dataset.domain = domain
-    li.innerHTML = `
-      <span class="whitelist-domain">${escapeHtml(domain)}</span>
-      <button class="whitelist-remove" title="Remove ${escapeHtml(domain)}" aria-label="Remove ${escapeHtml(domain)}">✕</button>
-    `
-    li.querySelector('.whitelist-remove').addEventListener('click', () => removeWhitelistDomain(domain))
+
+    const name = document.createElement('span')
+    name.className = 'whitelist-domain'
+    name.textContent = domain
+
+    const remove = document.createElement('button')
+    remove.className = 'whitelist-remove'
+    remove.title = `Remove ${domain}`
+    remove.setAttribute('aria-label', `Remove ${domain}`)
+    remove.textContent = '✕'
+    remove.addEventListener('click', () => removeWhitelistDomain(domain))
+
+    li.append(name, remove)
     whitelistItems.appendChild(li)
   }
 }
@@ -188,7 +196,7 @@ function formatDate(ts) {
 }
 
 function renderLog(log) {
-  logList.innerHTML = ''
+  logList.replaceChildren()
   if (!log || log.length === 0) {
     logEmpty.style.display = 'block'
     return
@@ -196,9 +204,6 @@ function renderLog(log) {
   logEmpty.style.display = 'none'
 
   for (const entry of log) {
-    const div = document.createElement('div')
-    div.className = 'log-entry'
-
     let badgeClass, badgeLabel
     if (entry.isDryRun) {
       badgeClass = 'log-badge--preview'
@@ -223,17 +228,34 @@ function renderLog(log) {
       detailText = parts.length ? parts.join(', ') + ' removed' : `${entry.sitesKept} sites kept`
     } else {
       summaryText = 'Nothing to clean'
-      detailText = `${entry.sitesAnalyzed} sites — all active or protected`
+      detailText = `${entry.sitesAnalyzed} sites, all active or protected`
     }
 
-    div.innerHTML = `
-      <div class="log-left">
-        <div class="log-time">${formatDate(entry.timestamp)}</div>
-        <div class="log-summary">${escapeHtml(summaryText)}</div>
-        <div class="log-detail">${escapeHtml(detailText)}</div>
-      </div>
-      <span class="log-badge ${badgeClass}">${badgeLabel}</span>
-    `
+    const div = document.createElement('div')
+    div.className = 'log-entry'
+
+    const left = document.createElement('div')
+    left.className = 'log-left'
+
+    const time = document.createElement('div')
+    time.className = 'log-time'
+    time.textContent = formatDate(entry.timestamp)
+
+    const summary = document.createElement('div')
+    summary.className = 'log-summary'
+    summary.textContent = summaryText
+
+    const detail = document.createElement('div')
+    detail.className = 'log-detail'
+    detail.textContent = detailText
+
+    left.append(time, summary, detail)
+
+    const badge = document.createElement('span')
+    badge.className = `log-badge ${badgeClass}`
+    badge.textContent = badgeLabel
+
+    div.append(left, badge)
     logList.appendChild(div)
   }
 }
@@ -260,15 +282,6 @@ async function getBrowserName() {
   }
 
   return 'the browser'
-}
-
-// --- Utilities ---
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
 }
 
 // --- Event wiring ---
