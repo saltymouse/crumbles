@@ -26,7 +26,6 @@
     "browsingData",
     "storage",
     "alarms",
-    "tabs",
     "<all_urls>"
   ],
   "background": {
